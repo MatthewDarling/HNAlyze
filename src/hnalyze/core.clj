@@ -75,3 +75,9 @@
 (defn unique-parents
   [parsed-json]
   (set (all-parent-ids parsed-json)))
+
+(defn top-level-count
+  [parsed-json]
+  (first (sort-by val > (-> parsed-json
+                            all-parent-ids
+                            frequencies))))
