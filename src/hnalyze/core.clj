@@ -44,3 +44,10 @@
 (defn comment-with-id
   [parsed-json object-id]
   (filter #(= object-id (:objectID %)) (all-comments parsed-json)))
+
+(defn author-contributions
+  [parsed-json]
+  (->> parsed-json
+       all-comments
+       (map :author)
+       frequencies))
