@@ -86,3 +86,7 @@
   [parsed-json]
   (let [story (:story_id (first (all-comments parsed-json)))]
     (filter #(= story (:parent_id %)) (all-comments parsed-json))))
+
+(defn comments-by-author
+  [parsed-json author]
+  (filter #(= author (:author %)) (all-comments parsed-json)))
