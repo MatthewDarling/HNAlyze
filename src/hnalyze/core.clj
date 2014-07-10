@@ -29,3 +29,14 @@
        pprint
        with-out-str
        (spit filename)))
+
+(defn all-comments
+  [parsed-json]
+  (second (first parsed-json)))
+
+(defn all-authors
+  [parsed-json]
+  (->> parsed-json
+       all-comments
+       (map :author)
+       set))
