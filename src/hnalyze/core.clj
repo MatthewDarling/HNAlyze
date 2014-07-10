@@ -22,3 +22,10 @@
 (defn parse-json
   [api-json]
   (ch/parse-string (clean-api-json api-json) true))
+
+(defn pprint-to-file
+  [x filename]
+  (->> x
+       pprint
+       with-out-str
+       (spit filename)))
