@@ -127,3 +127,8 @@
                 (map #(parent-and-children parsed-json
                                            (:objectID %))
                      (all-comments parsed-json)))))
+
+(defn -main
+  "I don't do a whole lot ... yet."
+  [& args]
+  (println "Hello, World!"))
