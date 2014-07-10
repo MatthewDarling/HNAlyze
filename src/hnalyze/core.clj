@@ -51,3 +51,7 @@
        all-comments
        (map :author)
        frequencies))
+
+(defn sorted-author-counts
+  [parsed-json]
+  (sort-by val > (author-contributions parsed-json)))
