@@ -63,3 +63,11 @@
 (defn parent-ids
   [comments]
   (map :parent_id comments))
+
+(defn all-object-ids
+  [parsed-json]
+  (map :objectID (all-comments parsed-json)))
+
+(defn all-parent-ids
+  [parsed-json]
+  (map :parent_id (all-comments parsed-json)))
