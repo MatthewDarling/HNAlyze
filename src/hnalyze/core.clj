@@ -112,3 +112,8 @@
          (interleave (all-object-ids parsed-json)
                      (map #(comment-with-id parsed-json %)
                           (all-object-ids parsed-json)))))
+
+(defn parent-and-children
+  "Returns a map of parent_id to objectID of direct children."
+  [parsed-json parent-id]
+  (hash-map parent-id (child-ids parsed-json parent-id)))
