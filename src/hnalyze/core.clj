@@ -40,3 +40,7 @@
        all-comments
        (map :author)
        set))
+
+(defn comment-with-id
+  [parsed-json object-id]
+  (filter #(= object-id (:objectID %)) (all-comments parsed-json)))
