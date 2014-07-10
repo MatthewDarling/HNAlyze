@@ -119,6 +119,10 @@
       object-ids
       ;;; You can thank/blame Achint Sandhu for inflicting this tricky macro usage on you
       (->> (map #(children-of-comment parsed-json %)))))
+(defn indirect-responses-to-author
+  [parsed-json author]
+  (map #(children-of-comment parsed-json %) (direct-responses-to-author parsed-json author)))
+
 (defn comments-by-id
   "Returns a map of :objectID to comment."
   [parsed-json]
