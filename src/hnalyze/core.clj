@@ -105,3 +105,10 @@
       object-ids
       ;;; You can thank/blame Achint Sandhu for inflicting this tricky macro usage on you
       (->> (map #(children-of-comment parsed-json %)))))
+(defn comments-by-id
+  "Returns a map of :objectID to comment."
+  [parsed-json]
+  (apply assoc {}
+         (interleave (all-object-ids parsed-json)
+                     (map #(comment-with-id parsed-json %)
+                          (all-object-ids parsed-json)))))
