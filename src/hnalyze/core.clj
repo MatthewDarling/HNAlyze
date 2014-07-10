@@ -98,6 +98,20 @@
 (defn child-ids
   [parsed-json parent-id]
   (map :objectID (children-of-comment parsed-json parent-id)))
+(defn all-children-of-comment
+  ([parsed-json parent-id]
+     (all-children-of-comment parsed-json
+                              parent-id
+                              (set (children-of-comment parsed-json parent-id))))
+  ([parsed-json parent-id children]
+     (let [new-children (into children
+                              (map #(children-of-comment parsed-json %)
+                                   (object-ids children)))]
+       (if (= (count new-children) (count children))
+         new-children
+         (all-children-of-comment parsed-json
+                                  parent-id
+                                  new-children)))))
 (defn direct-responses-to-author
   [parsed-json author]
   (-> parsed-json
