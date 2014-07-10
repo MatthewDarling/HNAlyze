@@ -9,6 +9,16 @@
   (slurp (str "https://hn.algolia.com/api/v1/search?tags=comment,story_"
               story-id
               "&hitsPerPage=500")))
+
+(defn clean-api-json
+  "Remove opening parentheses because they kill the JSON parser,
+  but closing parens are okay because... who knows. Also remove the
+  quotes around the objectID field so it can be a plain integer."
+  [api-json]
+  (string/replace
+   (string/replace api-json #"\(" "")
+   #"(objectID.:).(\d+).," "$1$2,"))
+
 (defn parse-json
   [api-json]
-  (ch/parse-string api-json true))
+  (ch/parse-string (clean-api-json api-json) true))
