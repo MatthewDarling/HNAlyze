@@ -71,3 +71,7 @@
 (defn all-parent-ids
   [parsed-json]
   (map :parent_id (all-comments parsed-json)))
+
+(defn unique-parents
+  [parsed-json]
+  (set (all-parent-ids parsed-json)))
