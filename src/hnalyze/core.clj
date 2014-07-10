@@ -4,6 +4,11 @@
             [clojure.string :as string]
             [clojure.pprint :refer :all])
   (:gen-class))
+
+;;;TODO: Fix the comment tree traversal to get all indirect children of a comment
+;;;TODO: Calculate statistics
+;;;TODO: Make some kind of UI?
+
 (defn get-comments
   [story-id]
   (slurp (str "https://hn.algolia.com/api/v1/search?tags=comment,story_"
@@ -112,6 +117,13 @@
          (all-children-of-comment parsed-json
                                   parent-id
                                   new-children)))))
+;;;Note to self: nested call to map like this:
+;; (->> (map :objectID)
+;;      (map read-string)
+;;      (map #(children-of-comment parsed-json %)))
+;; can be replaced with this:
+;; (map (comp #(children-of-comment parsed-json %) :objectID read-string parsed-json)
+
 (defn direct-responses-to-author
   [parsed-json author]
   (-> parsed-json
