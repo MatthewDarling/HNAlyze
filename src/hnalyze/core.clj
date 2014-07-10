@@ -90,3 +90,7 @@
 (defn comments-by-author
   [parsed-json author]
   (filter #(= author (:author %)) (all-comments parsed-json)))
+
+(defn children-of-comment
+  [parsed-json parent-id]
+  (filter #(= parent-id (:parent_id %)) (all-comments parsed-json)))
