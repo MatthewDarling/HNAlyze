@@ -94,3 +94,7 @@
 (defn children-of-comment
   [parsed-json parent-id]
   (filter #(= parent-id (:parent_id %)) (all-comments parsed-json)))
+
+(defn child-ids
+  [parsed-json parent-id]
+  (map :objectID (children-of-comment parsed-json parent-id)))
