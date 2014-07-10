@@ -81,3 +81,8 @@
   (first (sort-by val > (-> parsed-json
                             all-parent-ids
                             frequencies))))
+
+(defn top-level-comments
+  [parsed-json]
+  (let [story (:story_id (first (all-comments parsed-json)))]
+    (filter #(= story (:parent_id %)) (all-comments parsed-json))))
