@@ -55,3 +55,11 @@
 (defn sorted-author-counts
   [parsed-json]
   (sort-by val > (author-contributions parsed-json)))
+
+(defn object-ids
+  [comments]
+  (map :objectID comments))
+
+(defn parent-ids
+  [comments]
+  (map :parent_id comments))
