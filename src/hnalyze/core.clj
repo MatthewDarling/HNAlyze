@@ -9,3 +9,6 @@
   (slurp (str "https://hn.algolia.com/api/v1/search?tags=comment,story_"
               story-id
               "&hitsPerPage=500")))
+(defn parse-json
+  [api-json]
+  (ch/parse-string api-json true))
