@@ -117,3 +117,13 @@
   "Returns a map of parent_id to objectID of direct children."
   [parsed-json parent-id]
   (hash-map parent-id (child-ids parsed-json parent-id)))
+
+(defn comments-tree
+  "Returns a map of parent_id to objectID of all children."
+  [parsed-json]
+  (merge {(:story_id (first (all-comments parsed)))
+          (map :objectID (top-level-comments parsed-json))}
+         (apply merge
+                (map #(parent-and-children parsed-json
+                                           (:objectID %))
+                     (all-comments parsed-json)))))
