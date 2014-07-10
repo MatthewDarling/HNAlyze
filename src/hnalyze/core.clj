@@ -98,3 +98,10 @@
 (defn child-ids
   [parsed-json parent-id]
   (map :objectID (children-of-comment parsed-json parent-id)))
+(defn direct-responses-to-author
+  [parsed-json author]
+  (-> parsed-json
+      (comments-by-author author)
+      object-ids
+      ;;; You can thank/blame Achint Sandhu for inflicting this tricky macro usage on you
+      (->> (map #(children-of-comment parsed-json %)))))
