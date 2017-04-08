@@ -105,18 +105,18 @@
   (map :objectID (children-of-comment parsed-json parent-id)))
 (defn all-children-of-comment
   ([parsed-json parent-id]
-     (all-children-of-comment parsed-json
-                              parent-id
-                              (set (children-of-comment parsed-json parent-id))))
+   (all-children-of-comment parsed-json
+                            parent-id
+                            (set (children-of-comment parsed-json parent-id))))
   ([parsed-json parent-id children]
-     (let [new-children (into children
-                              (map #(children-of-comment parsed-json %)
-                                   (object-ids children)))]
-       (if (= (count new-children) (count children))
-         new-children
-         (all-children-of-comment parsed-json
-                                  parent-id
-                                  new-children)))))
+   (let [new-children (into children
+                            (map #(children-of-comment parsed-json %)
+                                 (object-ids children)))]
+     (if (= (count new-children) (count children))
+       new-children
+       (all-children-of-comment parsed-json
+                                parent-id
+                                new-children)))))
 ;;;Note to self: nested call to map like this:
 ;; (->> (map :objectID)
 ;;      (map read-string)
