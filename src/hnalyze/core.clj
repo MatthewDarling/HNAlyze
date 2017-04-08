@@ -151,7 +151,7 @@
 (defn comments-tree
   "Returns a map of parent_id to objectID of all children."
   [parsed-json]
-  (merge {(:story_id (first (all-comments parsed)))
+  (merge {(:story_id (first (all-comments parsed-json)))
           (map :objectID (top-level-comments parsed-json))}
          (apply merge
                 (map #(parent-and-children parsed-json
